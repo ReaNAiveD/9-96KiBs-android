@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 import com.nine96kibs.nine96kibsandroid.R;
 
-public class CollectionParentViewHolder extends CollectionViewHolder {
+class CollectionParentViewHolder extends CollectionViewHolder {
 
     private ImageView arrow;
 

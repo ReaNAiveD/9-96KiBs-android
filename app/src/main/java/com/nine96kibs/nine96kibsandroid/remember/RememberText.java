@@ -10,11 +10,11 @@ public class RememberText {
         this.source = source;
     }
 
-    public String getBody() {
+    String getBody() {
         return body;
     }
 
-    public String getSource() {
+    String getSource() {
         return source;
     }
 

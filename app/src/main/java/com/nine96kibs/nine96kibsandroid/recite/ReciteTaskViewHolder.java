@@ -8,13 +8,13 @@ import android.widget.TextView;
 
 import com.nine96kibs.nine96kibsandroid.R;
 
-public class ReciteTaskViewHolder extends RecyclerView.ViewHolder {
+class ReciteTaskViewHolder extends RecyclerView.ViewHolder {
 
     private View view;
     private TextView reciteTaskName;
     private ProgressBar reciteTaskProgress;
 
-    public ReciteTaskViewHolder(@NonNull View itemView) {
+    ReciteTaskViewHolder(@NonNull View itemView) {
         super(itemView);
         view = itemView;
         reciteTaskName = itemView.findViewById(R.id.recite_task_name);

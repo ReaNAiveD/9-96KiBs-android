@@ -3,7 +3,6 @@ package com.nine96kibs.nine96kibsandroid.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 

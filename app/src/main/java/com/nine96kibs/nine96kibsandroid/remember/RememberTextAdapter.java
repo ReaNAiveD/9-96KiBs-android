@@ -12,7 +12,7 @@ import java.util.List;
 
 public class RememberTextAdapter extends RecyclerView.Adapter<RememberTextViewHolder> {
 
-    List<RememberText> rememberTexts;
+    private List<RememberText> rememberTexts;
 
     public RememberTextAdapter(List<RememberText> rememberTexts) {
         this.rememberTexts = rememberTexts;

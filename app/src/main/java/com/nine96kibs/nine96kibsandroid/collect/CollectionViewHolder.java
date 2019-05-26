@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.nine96kibs.nine96kibsandroid.R;
 
-public class CollectionViewHolder extends RecyclerView.ViewHolder {
+class CollectionViewHolder extends RecyclerView.ViewHolder {
 
     private View view;
     private TextView info;
