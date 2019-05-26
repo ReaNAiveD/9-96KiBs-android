@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 import com.nine96kibs.nine96kibsandroid.fragment.ViewPagerFragmentPagerAdapter;
@@ -89,10 +90,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.id_no_03:
                     viewPager.setCurrentItem(2);
-//
-//                    TextView textView = findViewById(R.id.textView);
-//                    SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
-//                    textView.setText(sharedPreferences.getString("name", ""));
                     break;
             }
             return true;
@@ -109,7 +106,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         drawerLayout = findViewById(R.id.activity_main);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                TextView textView = findViewById(R.id.textView);
+                SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+                textView.setText(sharedPreferences.getString("name", ""));
+            }
+        };
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
@@ -122,4 +127,5 @@ public class MainActivity extends AppCompatActivity {
         else
             super.onBackPressed();
     }
+
 }
