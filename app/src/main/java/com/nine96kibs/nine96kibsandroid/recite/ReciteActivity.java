@@ -1,5 +1,6 @@
 package com.nine96kibs.nine96kibsandroid.recite;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -7,11 +8,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.nine96kibs.nine96kibsandroid.CommonResult;
 import com.nine96kibs.nine96kibsandroid.R;
+import com.nine96kibs.nine96kibsandroid.vo.ReciteLearnChoice;
 import com.nine96kibs.nine96kibsandroid.vo.ReciteToLearn;
 
+import java.io.IOError;
+import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ReciteActivity extends AppCompatActivity {
 
@@ -22,6 +36,8 @@ public class ReciteActivity extends AppCompatActivity {
     TextView question;
     TextView reciteSource;
     ReciteToLearn reciteToLearn;
+    int userId;
+    int taskId = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +64,11 @@ public class ReciteActivity extends AppCompatActivity {
         });
         question = findViewById(R.id.question);
         reciteSource = findViewById(R.id.recite_source);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+        userId = sharedPreferences.getInt("id", 0);
+
+        nextRecite();
     }
 
     @Override
@@ -57,14 +78,67 @@ public class ReciteActivity extends AppCompatActivity {
     }
 
     private void clickHaveDone() {
+        sendChoice(new ReciteLearnChoice(reciteToLearn.getReciteId(), userId, 2));
     }
 
     private void clickAlmostDone() {
-
+        sendChoice(new ReciteLearnChoice(reciteToLearn.getReciteId(), userId, 1));
     }
 
     private void clickNotDone() {
+        sendChoice(new ReciteLearnChoice(reciteToLearn.getReciteId(), userId, 0));
+    }
 
+    private void sendChoice(ReciteLearnChoice learnChoice){
+        new Thread(() ->{
+            try{
+                Gson gson = new Gson();
+                OkHttpClient httpClient = new OkHttpClient.Builder()
+                        .readTimeout(100, TimeUnit.SECONDS)
+                        .writeTimeout(60, TimeUnit.SECONDS)
+                        .connectTimeout(60, TimeUnit.SECONDS)
+                        .build();
+                RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), gson.toJson(learnChoice));
+                Request request = new Request.Builder().url("http://47.100.97.17:8848/classic-poetry/normal/choose").post(requestBody).build();
+                Response response = httpClient.newCall(request).execute();
+                if (response.body() == null) throw new Exception();
+                CommonResult commonResult = gson.fromJson(response.body().string(), CommonResult.class);
+                if (commonResult.getCode() != 200) Toast.makeText(ReciteActivity.this,
+                        commonResult.getCode() + " " + commonResult.getMessage(), Toast.LENGTH_SHORT).show();
+            }catch (IOException e){
+                e.printStackTrace();
+            }catch (Exception e){
+                Toast.makeText(ReciteActivity.this, "选择发送失败，请检查网络设置", Toast.LENGTH_SHORT).show();
+            }
+            nextRecite();
+        }).start();
+    }
+
+    private void nextRecite(){
+        new Thread(()-> {
+            try {
+                Gson gson = new Gson();
+                OkHttpClient httpClient = new OkHttpClient.Builder()
+                        .readTimeout(100, TimeUnit.SECONDS)
+                        .writeTimeout(60, TimeUnit.SECONDS)
+                        .connectTimeout(60, TimeUnit.SECONDS)
+                        .build();
+                Request request = new Request.Builder()
+                        .url("http://47.100.97.17:8848/classic-poetry/normal/learn-list?user-id=" + userId + "&task-id=" + taskId).get().build();
+                Response response = httpClient.newCall(request).execute();
+                if (response.body() == null) throw new Exception();
+                CommonResult commonResult = gson.fromJson(response.body().string(), CommonResult.class);
+                if (commonResult.getCode() != 200) Toast.makeText(ReciteActivity.this,
+                        commonResult.getCode() + " " + commonResult.getMessage(), Toast.LENGTH_SHORT).show();
+                reciteToLearn = gson.fromJson(gson.toJson(commonResult.getData()), ReciteToLearn.class);
+                question.setText(reciteToLearn.getTopic());
+                reciteSource.setText(reciteToLearn.getTopicSub());
+            }catch (IOException e){
+                e.printStackTrace();
+            }catch (Exception e){
+                Toast.makeText(ReciteActivity.this, "题目接收失败，请检查网络设置", Toast.LENGTH_SHORT).show();
+            }
+        }).start();
     }
 
     private String makeAnswer(String question, String answer) {

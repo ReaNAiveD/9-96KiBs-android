@@ -2,6 +2,11 @@ package com.nine96kibs.nine96kibsandroid.vo;
 
 public class ReciteLearnChoice {
 
+    public ReciteLearnChoice(Integer reciteId, Integer userId, Integer choice) {
+        this.reciteId = reciteId;
+        this.userId = userId;
+        this.choice = choice;
+    }
     private Integer reciteId;
 
     private Integer userId;
@@ -12,6 +17,7 @@ public class ReciteLearnChoice {
      * 2 - 已掌握
      */
     private Integer choice;
+
 
     public Integer getReciteId() {
         return reciteId;
