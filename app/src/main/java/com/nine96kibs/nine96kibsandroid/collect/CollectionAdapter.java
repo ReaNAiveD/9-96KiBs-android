@@ -32,7 +32,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionViewHolder
         CollectionViewHolder collectionViewHolder;
         switch (i) {
             case R.id.parent_type:
-                collectionViewHolder = new CollectionParentViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.third_item_parent, viewGroup, false));
+                collectionViewHolder = new CollectionParentViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.collection_parent, viewGroup, false));
                 collectionViewHolder.setOnClickViewListener(v -> {
                     int parentPosition = (int) v.getTag(R.id.parent_position);
                     ImageView arrow = v.findViewById(R.id.arrow);
@@ -50,7 +50,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionViewHolder
                 });
                 break;
             case R.id.child_type:
-                collectionViewHolder = new CollectionChildViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.third_item_child, viewGroup, false));
+                collectionViewHolder = new CollectionChildViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.collection_child, viewGroup, false));
                 collectionViewHolder.setOnClickViewListener(v -> {
                     String text = viewGroup.getResources().getString(R.string.warning);
                     Snackbar.make(v, text, Snackbar.LENGTH_SHORT).setAction("OK", null).show();

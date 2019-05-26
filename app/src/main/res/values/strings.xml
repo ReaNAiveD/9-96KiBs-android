@@ -1,31 +1,37 @@
 <resources>
     <string name="app_name">996背诵计划</string>
     <string name="title_activity_recite">ReciteActivity</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_desc">头像</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="s_no_01">第一个</string>
-    <string name="s_no_02">第二个</string>
-    <string name="s_no_03">第三个</string>
-    <string name="s_no_04">第四个</string>
-    <string name="s_no_05">第五个</string>
-    <string name="s_no_06">第六个</string>
-    <string name="s_no_07">第七个</string>
-    <string name="s_no_08">第八个</string>
-    <string name="s_no_09">第九个</string>
-    <string name="s_no_10">第十个</string>
-    <string name="s_no_11">第十一个</string>
-    <string name="s_no_12">第十二个</string>
-    <string name="s_no_13">第十三个</string>
-    <string name="activity_main_navigation_view_text_1">Android Studio</string>
-    <string name="activity_main_navigation_view_text_2">test@example.com</string>
+    <string name="recite">背诵</string>
+    <string name="remember">记忆</string>
+    <string name="collect">收藏</string>
+    <string name="ancient_poems">古诗词</string>
+    <string name="classical_chinese">文言文</string>
+    <string name="modern_chinese">现代文</string>
+    <string name="have_done">已掌握</string>
+    <string name="almost_done">有印象</string>
+    <string name="not_done">不认识</string>
+    <string name="to_do">未完成</string>
+
     <string name="warning">尚在建设中… (ToT)</string>
 
-    <item type="id" name="view_pager_position" />
-    <item type="id" name="parent_position" />
-    <item type="id" name="child_position" />
-    <item type="id" name="parent_type" />
-    <item type="id" name="child_type" />
-    <item type="id" name="arrow_direction" />
+    <item name="view_pager_position" type="id" />
+    <item name="parent_position" type="id" />
+    <item name="child_position" type="id" />
+    <item name="parent_type" type="id" />
+    <item name="child_type" type="id" />
+    <item name="arrow_direction" type="id" />
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="signin">注册</string>
+    <string name="login">登录</string>
+    <string name="username">输入您的用户名</string>
+    <string name="password">s输入您的密码</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>

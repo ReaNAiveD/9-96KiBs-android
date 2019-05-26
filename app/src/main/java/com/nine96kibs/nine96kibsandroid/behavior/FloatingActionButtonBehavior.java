@@ -33,7 +33,7 @@ public class FloatingActionButtonBehavior extends FloatingActionButton.Behavior 
     }
 
     private void hide(View view) {
-        view.animate().scaleX(0f).scaleY(0f).alpha(0f).setDuration(500).setListener(new AnimatorListenerAdapter() {
+        view.animate().scaleX(0f).scaleY(0f).setDuration(500).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
                 isAnimate = true;
@@ -48,7 +48,7 @@ public class FloatingActionButtonBehavior extends FloatingActionButton.Behavior 
 
     private void show(View view) {
         isAnimate  = true;
-        view.animate().scaleX(1f).scaleY(1f).alpha(1f).setDuration(500).setListener(new AnimatorListenerAdapter() {
+        view.animate().scaleX(1f).scaleY(1f).setDuration(500).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
                 view.setVisibility(View.VISIBLE);

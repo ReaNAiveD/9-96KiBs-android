@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/recite"
+        android:icon="@drawable/ic_recite"
+        android:title="@string/recite">
+    </item>
+
+    <item
+        android:id="@+id/id_no_02"
+        android:icon="@drawable/ic_remember"
+        android:title="@string/remember">
+    </item>
+
+    <item
+        android:id="@+id/id_no_03"
+        android:icon="@drawable/ic_collect"
+        android:title="@string/collect">
+    </item>
+
+</menu>

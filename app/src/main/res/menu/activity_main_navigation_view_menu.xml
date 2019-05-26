@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="none">
-        <item
-            android:id="@+id/id_no_04"
-            android:icon="@drawable/ic_no_04"
-            android:title="@string/s_no_04" />
-        <item
-            android:id="@+id/id_no_05"
-            android:icon="@drawable/ic_no_05"
-            android:title="@string/s_no_05" />
-        <item
-            android:id="@+id/id_no_06"
-            android:icon="@drawable/ic_no_06"
-            android:title="@string/s_no_06" />
-    </group>
-
-    <item android:title="Communicate">
+    <item android:title="@string/ancient_poems">
         <menu>
             <item
-                android:id="@+id/id_no_07"
-                android:icon="@drawable/ic_no_07"
-                android:title="@string/s_no_07" />
+                android:id="@+id/ancient_poems_done"
+                android:icon="@drawable/ic_done"
+                android:title="@string/have_done" />
             <item
-                android:id="@+id/id_no_08"
-                android:icon="@drawable/ic_no_08"
-                android:title="@string/s_no_08" />
+                android:id="@+id/ancient_poems_todo"
+                android:icon="@drawable/ic_todo"
+                android:title="@string/to_do" />
+        </menu>
+    </item>
+    <item android:title="@string/classical_chinese">
+        <menu>
+            <item
+                android:id="@+id/classical_chinese_done"
+                android:icon="@drawable/ic_done"
+                android:title="@string/have_done" />
+            <item
+                android:id="@+id/classical_chinese_todo"
+                android:icon="@drawable/ic_todo"
+                android:title="@string/to_do" />
+        </menu>
+    </item>
+    <item android:title="@string/modern_chinese">
+        <menu>
+            <item
+                android:id="@+id/modern_chinese_done"
+                android:icon="@drawable/ic_done"
+                android:title="@string/have_done" />
+            <item
+                android:id="@+id/modern_chinese_todo"
+                android:icon="@drawable/ic_todo"
+                android:title="@string/to_do" />
         </menu>
     </item>
 

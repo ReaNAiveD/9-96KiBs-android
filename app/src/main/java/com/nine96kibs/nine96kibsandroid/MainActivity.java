@@ -11,8 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.nine96kibs.nine96kibsandroid.fragment.ViewPagerFragmentPagerAdapter;
 
@@ -48,13 +46,16 @@ public class MainActivity extends AppCompatActivity {
                 bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(position).getItemId());
                 switch (position) {
                     case 0:
-                        floatingActionButton.setImageResource(R.drawable.ic_no_11);
+                        toolbar.setTitle("选择任务");
+                        floatingActionButton.setAlpha(0f);
                         break;
                     case 1:
-                        floatingActionButton.setImageResource(R.drawable.ic_no_12);
+                        toolbar.setTitle("细读原句");
+                        floatingActionButton.setAlpha(1f);
                         break;
                     case 2:
-                        floatingActionButton.setImageResource(R.drawable.ic_no_13);
+                        toolbar.setTitle("收藏（6）");
+                        floatingActionButton.setAlpha(0f);
                         break;
                 }
             }
@@ -67,15 +68,18 @@ public class MainActivity extends AppCompatActivity {
 
         floatingActionButton = findViewById(R.id.floating_action_button);
         floatingActionButton.setTag(R.id.view_pager_position, 0);
+        floatingActionButton.setAlpha(0f);
         floatingActionButton.setOnClickListener(v -> {
-            String text = (int) v.getTag(R.id.view_pager_position) + getResources().getString(R.string.warning);
-            Snackbar.make(v, text, Snackbar.LENGTH_SHORT).setAction("OK", null).show();
+            if ((int) floatingActionButton.getTag(R.id.view_pager_position) == 1) {
+                Snackbar.make(viewPager, getResources().getString(R.string.warning), Snackbar.LENGTH_SHORT).setAction("OK", null).show();
+
+            }
         });
 
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
-                case R.id.id_no_01:
+                case R.id.recite:
                     viewPager.setCurrentItem(0);
                     break;
                 case R.id.id_no_02:
@@ -90,9 +94,11 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(menuItem -> {
-            String text = menuItem.getItemId() + getResources().getString(R.string.warning);
-            Snackbar.make(viewPager, text, Snackbar.LENGTH_SHORT).setAction("OK", null).show();
-            drawerLayout.closeDrawer(GravityCompat.START);
+            if (menuItem.isChecked()) {
+                menuItem.setChecked(false);
+            } else {
+                menuItem.setChecked(true);
+            }
             return true;
         });
 
@@ -100,20 +106,6 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main_body_view_toolbar_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.id_no_09) {
-            Snackbar.make(viewPager, R.id.id_no_09 + getResources().getString(R.string.warning), Snackbar.LENGTH_SHORT).setAction("OK", null).show();
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

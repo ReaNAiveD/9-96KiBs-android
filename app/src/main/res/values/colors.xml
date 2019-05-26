@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#3EAF7C</color>
+    <color name="colorPrimaryDark">#3EAF7C</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="white">#FFFFFF</color>
 
-    <color name="endColor">#503399FF</color>
-    <color name="startColor">#103399FF</color>
+    <color name="endColor">#3EAF7C</color>
+    <color name="startColor">#3EAF7C</color>
+
+    <color name="have_done">#66BB6A</color>
+    <color name="almost_dome">#FFCA28</color>
+    <color name="not_done">#EF5350</color>
+
+    <color name="recite_task">#F06292</color>
 </resources>

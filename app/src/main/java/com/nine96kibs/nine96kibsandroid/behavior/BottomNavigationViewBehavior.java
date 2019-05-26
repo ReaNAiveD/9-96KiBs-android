@@ -32,7 +32,7 @@ public class BottomNavigationViewBehavior extends CoordinatorLayout.Behavior<Bot
             show(child);
     }
 
-    void hide(View view) {
+    private void hide(View view) {
         view.animate().translationY(view.getTranslationY()+view.getHeight()).alpha(0f).setDuration(500).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -46,7 +46,7 @@ public class BottomNavigationViewBehavior extends CoordinatorLayout.Behavior<Bot
         }).start();
     }
 
-    void show(View view) {
+    private void show(View view) {
         view.animate().translationY(view.getTranslationY()-view.getHeight()).alpha(1f).setDuration(500).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
