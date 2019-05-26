@@ -8,11 +8,11 @@
             <item
                 android:id="@+id/ancient_poems_done"
                 android:icon="@drawable/ic_done"
-                android:title="@string/have_done" />
+                android:title="已掌握 9 / 96" />
             <item
                 android:id="@+id/ancient_poems_todo"
                 android:icon="@drawable/ic_todo"
-                android:title="@string/to_do" />
+                android:title="未完成 84.4%" />
         </menu>
     </item>
     <item android:title="@string/classical_chinese">
@@ -20,11 +20,11 @@
             <item
                 android:id="@+id/classical_chinese_done"
                 android:icon="@drawable/ic_done"
-                android:title="@string/have_done" />
+                android:title="已掌握 2 / 23" />
             <item
                 android:id="@+id/classical_chinese_todo"
                 android:icon="@drawable/ic_todo"
-                android:title="@string/to_do" />
+                android:title="未完成 87.0%" />
         </menu>
     </item>
     <item android:title="@string/modern_chinese">
@@ -32,11 +32,11 @@
             <item
                 android:id="@+id/modern_chinese_done"
                 android:icon="@drawable/ic_done"
-                android:title="@string/have_done" />
+                android:title="已掌握 21 / 23" />
             <item
                 android:id="@+id/modern_chinese_todo"
                 android:icon="@drawable/ic_todo"
-                android:title="@string/to_do" />
+                android:title="未完成 8.7%" />
         </menu>
     </item>
 

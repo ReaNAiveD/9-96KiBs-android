@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -56,9 +57,15 @@ public class LoginActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 Gson gson = new Gson();
-                System.out.println(usernameEditText.getText());
-                System.out.println(passwordEditText.getText());
-                AccountVO accountVO = new AccountVO(String.valueOf(usernameEditText.getText()), String.valueOf(passwordEditText.getText()));
+                String userName = String.valueOf(usernameEditText.getText());
+                String password = String.valueOf(passwordEditText.getText());
+                if (userName.length() < 8 || password.length() < 6) {
+                    Looper.prepare();
+                    Toast.makeText(LoginActivity.this, "输入过短，请重新尝试", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                    return;
+                }
+                AccountVO accountVO = new AccountVO(userName, password);
                 OkHttpClient httpClient = new OkHttpClient.Builder()
                         .readTimeout(100, TimeUnit.SECONDS)
                         .writeTimeout(60, TimeUnit.SECONDS)
@@ -86,7 +93,13 @@ public class LoginActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 Gson gson = new Gson();
-                AccountVO accountVO = new AccountVO(String.valueOf(usernameEditText.getText()), String.valueOf(passwordEditText.getText()));
+                String userName = String.valueOf(usernameEditText.getText());
+                String password = String.valueOf(passwordEditText.getText());
+                if (userName.length() < 8 || password.length() < 6) {
+                    Toast.makeText(LoginActivity.this, "输入过短，请重新尝试", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                AccountVO accountVO = new AccountVO(userName, password);
                 OkHttpClient httpClient = new OkHttpClient.Builder()
                         .readTimeout(10, TimeUnit.SECONDS)
                         .writeTimeout(6, TimeUnit.SECONDS)
@@ -99,6 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                 AccountInfoVO accountInfoVO = gson.fromJson(gson.toJson(commonResult.getData()), AccountInfoVO.class);
                 SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
                 editor.putInt("id", accountInfoVO.getId());
+                editor.putString("name", accountInfoVO.getUsername());
                 editor.apply();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);

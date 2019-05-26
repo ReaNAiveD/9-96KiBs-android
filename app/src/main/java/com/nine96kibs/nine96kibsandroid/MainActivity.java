@@ -1,5 +1,6 @@
 package com.nine96kibs.nine96kibsandroid;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.nine96kibs.nine96kibsandroid.fragment.ViewPagerFragmentPagerAdapter;
 
@@ -87,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.id_no_03:
                     viewPager.setCurrentItem(2);
+//
+//                    TextView textView = findViewById(R.id.textView);
+//                    SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+//                    textView.setText(sharedPreferences.getString("name", ""));
                     break;
             }
             return true;
@@ -106,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+
     }
 
     @Override
