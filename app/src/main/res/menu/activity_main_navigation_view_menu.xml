@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/id_no_04"
+            android:icon="@drawable/ic_no_04"
+            android:title="@string/s_no_04" />
+        <item
+            android:id="@+id/id_no_05"
+            android:icon="@drawable/ic_no_05"
+            android:title="@string/s_no_05" />
+        <item
+            android:id="@+id/id_no_06"
+            android:icon="@drawable/ic_no_06"
+            android:title="@string/s_no_06" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/id_no_07"
+                android:icon="@drawable/ic_no_07"
+                android:title="@string/s_no_07" />
+            <item
+                android:id="@+id/id_no_08"
+                android:icon="@drawable/ic_no_08"
+                android:title="@string/s_no_08" />
+        </menu>
+    </item>
+
+</menu>

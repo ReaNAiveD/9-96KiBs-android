@@ -1,3 +1,31 @@
 <resources>
-    <string name="app_name">9-96KiBs-android</string>
+    <string name="app_name">996背诵计划</string>
+    <string name="title_activity_recite">ReciteActivity</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="s_no_01">第一个</string>
+    <string name="s_no_02">第二个</string>
+    <string name="s_no_03">第三个</string>
+    <string name="s_no_04">第四个</string>
+    <string name="s_no_05">第五个</string>
+    <string name="s_no_06">第六个</string>
+    <string name="s_no_07">第七个</string>
+    <string name="s_no_08">第八个</string>
+    <string name="s_no_09">第九个</string>
+    <string name="s_no_10">第十个</string>
+    <string name="s_no_11">第十一个</string>
+    <string name="s_no_12">第十二个</string>
+    <string name="s_no_13">第十三个</string>
+    <string name="activity_main_navigation_view_text_1">Android Studio</string>
+    <string name="activity_main_navigation_view_text_2">test@example.com</string>
+    <string name="warning">尚在建设中… (ToT)</string>
+
+    <item type="id" name="view_pager_position" />
+    <item type="id" name="parent_position" />
+    <item type="id" name="child_position" />
+    <item type="id" name="parent_type" />
+    <item type="id" name="child_type" />
+    <item type="id" name="arrow_direction" />
 </resources>
