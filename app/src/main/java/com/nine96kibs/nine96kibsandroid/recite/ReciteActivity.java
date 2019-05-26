@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.nine96kibs.nine96kibsandroid.R;
+import com.nine96kibs.nine96kibsandroid.vo.ReciteToLearn;
 
 import java.util.Objects;
 
@@ -20,6 +21,7 @@ public class ReciteActivity extends AppCompatActivity {
     Button notDoneButton;
     TextView question;
     TextView reciteSource;
+    ReciteToLearn reciteToLearn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,7 @@ public class ReciteActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         View view = findViewById(R.id.content_recite);
         view.setOnClickListener(v -> {
-            System.out.println("p");
+            question.setText(makeAnswer(reciteToLearn.getTopic(), reciteToLearn.getAnswer()));
         });
         haveDoneButton = findViewById(R.id.button_have_done);
         haveDoneButton.setOnClickListener(v -> {
@@ -42,7 +44,7 @@ public class ReciteActivity extends AppCompatActivity {
         });
         notDoneButton = findViewById(R.id.button_not_done);
         notDoneButton.setOnClickListener(v -> {
-            System.out.println("c");
+
         });
         question = findViewById(R.id.question);
         reciteSource = findViewById(R.id.recite_source);
@@ -66,9 +68,12 @@ public class ReciteActivity extends AppCompatActivity {
     }
 
     private String makeAnswer(String question, String answer) {
-        int start = question.indexOf('\u25A1');
-        int end = question.indexOf('\u25A1');
-        return question.substring(0, start) + answer + question.substring(end + 1);
+        if (question.contains("\u25A1")) {
+            int start = question.indexOf('\u25A1');
+            int end = question.indexOf('\u25A1');
+            return question.substring(0, start) + answer + question.substring(end + 1);
+        }
+        return question;
     }
 
 }
