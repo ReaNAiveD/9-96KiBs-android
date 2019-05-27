@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.nine96kibs.nine96kibsandroid.MainActivity;
 import com.nine96kibs.nine96kibsandroid.R;
 
 import java.util.List;
@@ -25,6 +26,8 @@ public class ReciteTaskAdapter extends RecyclerView.Adapter<ReciteTaskViewHolder
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recite_task, viewGroup, false);
         final ReciteTaskViewHolder reciteTaskViewHolder = new ReciteTaskViewHolder(view);
         reciteTaskViewHolder.setOnClickViewListener(v -> {
+            int taskId = (int) v.getTag(R.id.recite_id);
+            MainActivity.taskId = taskId;
             Intent intent = new Intent(viewGroup.getContext(), ReciteActivity.class);
             viewGroup.getContext().startActivity(intent);
         });
@@ -34,6 +37,7 @@ public class ReciteTaskAdapter extends RecyclerView.Adapter<ReciteTaskViewHolder
     @Override
     public void onBindViewHolder(@NonNull ReciteTaskViewHolder reciteTaskViewHolder, int i) {
         ReciteTask reciteTask = reciteTasks.get(i);
+        reciteTaskViewHolder.setTag(R.id.recite_id, reciteTask.getId());
         reciteTaskViewHolder.setReciteTaskName(reciteTask.getName());
         reciteTaskViewHolder.setReciteTaskProgress(reciteTask.getDone(), reciteTask.getHalf(), reciteTask.getTodo());
     }

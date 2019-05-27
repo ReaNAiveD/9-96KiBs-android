@@ -24,6 +24,7 @@
     <item name="parent_type" type="id" />
     <item name="child_type" type="id" />
     <item name="arrow_direction" type="id" />
+    <item name="recite_id" type="id" />
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="signin">注册</string>

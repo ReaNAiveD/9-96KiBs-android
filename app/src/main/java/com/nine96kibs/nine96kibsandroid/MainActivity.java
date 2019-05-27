@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     RecyclerView.Adapter reciteAdapter;
     public static int userId;
+    public static int taskId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

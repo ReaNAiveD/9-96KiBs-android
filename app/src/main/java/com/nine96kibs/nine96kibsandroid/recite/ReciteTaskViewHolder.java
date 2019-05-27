@@ -21,6 +21,10 @@ class ReciteTaskViewHolder extends RecyclerView.ViewHolder {
         reciteTaskProgress = itemView.findViewById(R.id.recite_task_progress);
     }
 
+    void setTag(int key, Object tag) {
+        view.setTag(key, tag);
+    }
+
     void setOnClickViewListener(View.OnClickListener l) {
         view.setOnClickListener(l);
     }
