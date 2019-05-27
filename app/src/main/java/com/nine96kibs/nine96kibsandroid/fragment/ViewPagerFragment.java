@@ -150,9 +150,9 @@ public class ViewPagerFragment extends Fragment {
                     if (reciteAdapter == null) {
                         List<ReciteTask> reciteTasks = new ArrayList<>();
                         reciteTasks.add(new ReciteTask(1, "背诵集合一", 4, 0, 1));
-                        reciteTasks.add(new ReciteTask(2, "氓合集", 0, 2, 1));
-                        reciteTasks.add(new ReciteTask(3, "背诵集合二", 0, 0, 4));
-                        reciteTasks.add(new ReciteTask(4, "桃花源记合集", 0, 0, 3));
+                        reciteTasks.add(new ReciteTask(2, "氓合集", 0, 3, 0));
+                        reciteTasks.add(new ReciteTask(3, "背诵集合二", 0, 4, 0));
+                        reciteTasks.add(new ReciteTask(4, "桃花源记合集", 0, 2, 1));
                         reciteAdapter = new ReciteTaskAdapter(reciteTasks);
                     }
                     recyclerView.setAdapter(reciteAdapter);
