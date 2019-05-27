@@ -71,6 +71,8 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionViewHolder
         //use switch do something different (TODO)
         if (collection.getType() == R.id.parent_type) {
             ((CollectionParentViewHolder) collectionViewHolder).tagArrow(R.id.arrow_direction, "down");
+        } else {
+            ((CollectionChildViewHolder) collectionViewHolder).setLight();
         }
     }
 

@@ -33,15 +33,13 @@ public class ViewPagerFragment extends Fragment {
 
     public ViewPagerFragment() {
         List<ReciteTask> reciteTasks = new ArrayList<>();
-        reciteTasks.add(new ReciteTask("test", 4, 3, 2));
-        reciteTasks.add(new ReciteTask("520", 5, 3, 0));
-        reciteTasks.add(new ReciteTask("666", 6, 6, 6));
-        reciteTasks.add(new ReciteTask("test", 4, 3, 2));
-        reciteTasks.add(new ReciteTask("520", 5, 3, 0));
-        reciteTasks.add(new ReciteTask("666", 6, 6, 6));
-        reciteTasks.add(new ReciteTask("test", 4, 3, 2));
-        reciteTasks.add(new ReciteTask("520", 5, 3, 0));
-        reciteTasks.add(new ReciteTask("666", 6, 6, 6));
+        reciteTasks.add(new ReciteTask("入门任务1", 4, 3, 2));
+        reciteTasks.add(new ReciteTask("入门任务2", 5, 3, 0));
+        reciteTasks.add(new ReciteTask("入门任务2", 5, 3, 0));
+        reciteTasks.add(new ReciteTask("挑战任务1", 6, 6, 6));
+        reciteTasks.add(new ReciteTask("挑战任务2", 4, 3, 2));
+        reciteTasks.add(new ReciteTask("挑战任务3", 5, 3, 0));
+        reciteTasks.add(new ReciteTask("挑战任务4", 6, 6, 6));
         reciteAdapter = new ReciteTaskAdapter(reciteTasks);
 
         List<RememberText> rememberTexts = new ArrayList<>();
