@@ -99,9 +99,9 @@ public class ReciteActivity extends AppCompatActivity {
                 RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), gson.toJson(learnChoice));
                 Request request = new Request.Builder().url("http://47.100.97.17:8848/classic-poetry/normal/choose").post(requestBody).build();
                 Response response = httpClient.newCall(request).execute();
-                if (response.body() == null) {
-                    throw new Exception();
-                }
+//                if (response.body() == null) {
+//                    throw new Exception();
+//                }
                 CommonResult commonResult = gson.fromJson(response.body().string(), CommonResult.class);
                 if (commonResult.getCode() != 200) {
                     this.runOnUiThread(() -> Toast.makeText(ReciteActivity.this, commonResult.getCode() + " " + commonResult.getMessage(), Toast.LENGTH_SHORT).show());
@@ -125,12 +125,10 @@ public class ReciteActivity extends AppCompatActivity {
                         .connectTimeout(60, TimeUnit.SECONDS)
                         .build();
                 Request request = new Request.Builder()
-                        .url("http://47.100.97.17:8848/classic-poetry/normal/learn-list?user-id=" + userId + "&task-id=" + taskId).get().build();
+                        .url("http://47.100.97.17:8848/classic-poetry/normal/learn?user-id=" + userId + "&task-id=" + taskId).get().build();
                 Response response = httpClient.newCall(request).execute();
-                Log.d("233", "nextRecite: " + response.code());
-                if (response.body() == null) throw new Exception();
+                //if (response.body() == null) throw new Exception();
                 CommonResult commonResult = gson.fromJson(response.body().string(), CommonResult.class);
-                Log.d("233", "nextRecite: " + response.body().string());
                 if (commonResult.getCode() != 200) {
                     this.runOnUiThread(() -> Toast.makeText(ReciteActivity.this, commonResult.getCode() + " " + commonResult.getMessage(), Toast.LENGTH_SHORT).show());
                 }
@@ -147,10 +145,11 @@ public class ReciteActivity extends AppCompatActivity {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
-                Log.d("InitialTest", "nextRecite: 8");
-                this.runOnUiThread(() -> Toast.makeText(ReciteActivity.this, "题目接收失败，请检查网络设置", Toast.LENGTH_LONG).show());
             }
+//            catch (Exception e) {
+//                Log.d("InitialTest", "nextRecite: 8");
+//                this.runOnUiThread(() -> Toast.makeText(ReciteActivity.this, "题目接收失败，请检查网络设置", Toast.LENGTH_LONG).show());
+//            }
         }).start();
     }
 
