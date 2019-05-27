@@ -100,7 +100,7 @@ public class ViewPagerFragment extends Fragment {
         collections.add(new CollectionChild(R.id.child_type, 1, 1, "苟富贵，毋相忘。"));
         collections.add(new CollectionChild(R.id.child_type, 1, 2, "王侯将相宁有种乎？"));
         collections.add(new CollectionParent(R.id.parent_type, 2, 0, "现代文"));
-        collections.add(new CollectionChild(R.id.child_type, 2, 1, "我去买几个橘子，你就站在此地，不要走动。"));
+        collections.add(new CollectionChild(R.id.child_type, 2, 1, "惨象,已使我目不忍视了,流言尤使我耳不忍闻。"));
         List<Integer> shownPositionList = new ArrayList<>();
         shownPositionList.add(0);
         shownPositionList.add(1);
@@ -146,6 +146,14 @@ public class ViewPagerFragment extends Fragment {
                         recyclerView.setLayoutManager(new GridLayoutManager(recyclerView.getContext(), 3));
                     } else {
                         recyclerView.setLayoutManager(new GridLayoutManager(recyclerView.getContext(), 2));
+                    }
+                    if (reciteAdapter == null) {
+                        List<ReciteTask> reciteTasks = new ArrayList<>();
+                        reciteTasks.add(new ReciteTask(1, "背诵集合一", 4, 0, 1));
+                        reciteTasks.add(new ReciteTask(2, "氓合集", 0, 2, 1));
+                        reciteTasks.add(new ReciteTask(3, "背诵集合二", 0, 0, 4));
+                        reciteTasks.add(new ReciteTask(4, "桃花源记合集", 0, 0, 3));
+                        reciteAdapter = new ReciteTaskAdapter(reciteTasks);
                     }
                     recyclerView.setAdapter(reciteAdapter);
                     break;

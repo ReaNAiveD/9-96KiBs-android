@@ -127,8 +127,10 @@ public class ReciteActivity extends AppCompatActivity {
                 Request request = new Request.Builder()
                         .url("http://47.100.97.17:8848/classic-poetry/normal/learn-list?user-id=" + userId + "&task-id=" + taskId).get().build();
                 Response response = httpClient.newCall(request).execute();
+                Log.d("233", "nextRecite: " + response.code());
                 if (response.body() == null) throw new Exception();
                 CommonResult commonResult = gson.fromJson(response.body().string(), CommonResult.class);
+                Log.d("233", "nextRecite: " + response.body().string());
                 if (commonResult.getCode() != 200) {
                     this.runOnUiThread(() -> Toast.makeText(ReciteActivity.this, commonResult.getCode() + " " + commonResult.getMessage(), Toast.LENGTH_SHORT).show());
                 }
@@ -136,6 +138,7 @@ public class ReciteActivity extends AppCompatActivity {
                     this.runOnUiThread(() -> Toast.makeText(ReciteActivity.this, "没有更多要学习的题目了，换组任务吧", Toast.LENGTH_SHORT).show());
                 } else {
                     reciteToLearn = gson.fromJson(gson.toJson(commonResult.getData()), ReciteToLearn.class);
+                    Log.e("233", gson.toJson(commonResult.getData()));
                     this.runOnUiThread(() -> {
                         reciteToLearn.setTopic(reciteToLearn.getTopic().replace("/?", "\u25A1"));
                         question.setText(reciteToLearn.getTopic());
