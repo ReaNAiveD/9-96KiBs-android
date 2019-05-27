@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.nine96kibs.nine96kibsandroid.CommonResult;
+import com.nine96kibs.nine96kibsandroid.MainActivity;
 import com.nine96kibs.nine96kibsandroid.R;
 import com.nine96kibs.nine96kibsandroid.vo.ReciteLearnChoice;
 import com.nine96kibs.nine96kibsandroid.vo.ReciteToLearn;
@@ -125,7 +126,7 @@ public class ReciteActivity extends AppCompatActivity {
                         .connectTimeout(60, TimeUnit.SECONDS)
                         .build();
                 Request request = new Request.Builder()
-                        .url("http://47.100.97.17:8848/classic-poetry/normal/learn?user-id=" + userId + "&task-id=" + taskId).get().build();
+                        .url("http://47.100.97.17:8848/classic-poetry/normal/learn?user-id=" + userId + "&task-id=" + MainActivity.taskId).get().build();
                 Response response = httpClient.newCall(request).execute();
                 //if (response.body() == null) throw new Exception();
                 CommonResult commonResult = gson.fromJson(response.body().string(), CommonResult.class);
