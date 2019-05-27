@@ -11,11 +11,27 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nine96kibs.nine96kibsandroid.fragment.ViewPagerFragmentPagerAdapter;
+import com.nine96kibs.nine96kibsandroid.recite.ReciteTask;
+import com.nine96kibs.nine96kibsandroid.recite.ReciteTaskAdapter;
+import com.nine96kibs.nine96kibsandroid.vo.TaskInfoVO;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     Toolbar toolbar;
     ViewPager viewPager;
+    RecyclerView.Adapter reciteAdapter;
+    public static int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+        userId = sharedPreferences.getInt("id", 0);
 
         viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(new ViewPagerFragmentPagerAdapter(getSupportFragmentManager()));

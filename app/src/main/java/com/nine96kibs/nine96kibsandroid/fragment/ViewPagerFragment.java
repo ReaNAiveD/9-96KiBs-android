@@ -1,5 +1,6 @@
 package com.nine96kibs.nine96kibsandroid.fragment;
 
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,10 +9,15 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.nine96kibs.nine96kibsandroid.CommonResult;
+import com.nine96kibs.nine96kibsandroid.MainActivity;
 import com.nine96kibs.nine96kibsandroid.R;
 import com.nine96kibs.nine96kibsandroid.collect.Collection;
 import com.nine96kibs.nine96kibsandroid.collect.CollectionAdapter;
@@ -21,9 +27,17 @@ import com.nine96kibs.nine96kibsandroid.recite.ReciteTask;
 import com.nine96kibs.nine96kibsandroid.recite.ReciteTaskAdapter;
 import com.nine96kibs.nine96kibsandroid.remember.RememberText;
 import com.nine96kibs.nine96kibsandroid.remember.RememberTextAdapter;
+import com.nine96kibs.nine96kibsandroid.vo.TaskInfoVO;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ViewPagerFragment extends Fragment {
 
@@ -32,15 +46,30 @@ public class ViewPagerFragment extends Fragment {
     RecyclerView.Adapter collectAdapter;
 
     public ViewPagerFragment() {
-        List<ReciteTask> reciteTasks = new ArrayList<>();
-        reciteTasks.add(new ReciteTask("入门任务1", 4, 3, 2));
-        reciteTasks.add(new ReciteTask("入门任务2", 5, 3, 0));
-        reciteTasks.add(new ReciteTask("入门任务2", 5, 3, 0));
-        reciteTasks.add(new ReciteTask("挑战任务1", 6, 6, 6));
-        reciteTasks.add(new ReciteTask("挑战任务2", 4, 3, 2));
-        reciteTasks.add(new ReciteTask("挑战任务3", 5, 3, 0));
-        reciteTasks.add(new ReciteTask("挑战任务4", 6, 6, 6));
-        reciteAdapter = new ReciteTaskAdapter(reciteTasks);
+
+        new Thread(() -> {
+            try {
+                Gson gson = new Gson();
+                OkHttpClient client = new OkHttpClient.Builder()
+                        .readTimeout(100, TimeUnit.SECONDS)
+                        .writeTimeout(60, TimeUnit.SECONDS)
+                        .connectTimeout(60, TimeUnit.SECONDS)
+                        .build();
+                Request request = new Request.Builder().url("http://47.100.97.17:8848/classic-poetry/normal/task-info?user-id="+ MainActivity.userId).get().build();
+                Log.d("ViewPagerFragment", "http://47.100.97.17:8848/classic-poetry/normal/task-info?user-id="+ MainActivity.userId);
+                Response response = client.newCall(request).execute();
+                CommonResult commonResult = gson.fromJson(response.body().string(), CommonResult.class);
+                Log.d("ViewPagerFragment", "ViewPagerFragment: " + gson.toJson(commonResult.getData()));
+                List<TaskInfoVO> taskInfoVOList = gson.fromJson(gson.toJson(commonResult.getData()), new TypeToken<List<TaskInfoVO>>(){}.getType());
+                List<ReciteTask> reciteTasks = new ArrayList<>();
+                for (TaskInfoVO taskInfoVO : taskInfoVOList) {
+                    reciteTasks.add(new ReciteTask(taskInfoVO.getTaskId(), taskInfoVO.getTaskName(), taskInfoVO.getTaskReciteCommand(), taskInfoVO.getTaskReciteLearning() - taskInfoVO.getTaskReciteCommand(), taskInfoVO.getTaskReciteTotal() - taskInfoVO.getTaskReciteLearning()));
+                }
+                reciteAdapter = new ReciteTaskAdapter(reciteTasks);
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }).start();
 
         List<RememberText> rememberTexts = new ArrayList<>();
         rememberTexts.add(new RememberText("君不见，黄河之水天上来，奔流到海不复回。\n" +

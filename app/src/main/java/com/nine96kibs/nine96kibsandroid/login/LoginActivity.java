@@ -3,7 +3,6 @@ package com.nine96kibs.nine96kibsandroid.login;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,9 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                 String userName = String.valueOf(usernameEditText.getText());
                 String password = String.valueOf(passwordEditText.getText());
                 if (userName.length() < 8 || password.length() < 6) {
-                    Looper.prepare();
-                    Toast.makeText(LoginActivity.this, "输入过短，请重新尝试", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
+                    this.runOnUiThread(() -> Toast.makeText(LoginActivity.this, "输入过短，请重新尝试", Toast.LENGTH_SHORT).show());
                     return;
                 }
                 AccountVO accountVO = new AccountVO(userName, password);
@@ -73,15 +70,15 @@ public class LoginActivity extends AppCompatActivity {
                 RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), gson.toJson(accountVO));
                 Request request = new Request.Builder().url("http://47.100.97.17:8848/account/register").post(requestBody).build();
                 Response response = httpClient.newCall(request).execute();
-                Looper.prepare();
                 if (!response.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "注册失败，请重新尝试", Toast.LENGTH_SHORT).show();
+                    this.runOnUiThread(() ->
+                            Toast.makeText(LoginActivity.this, "注册失败，请重新尝试", Toast.LENGTH_SHORT).show());
                 } else {
                     usernameEditText.setText("");
                     passwordEditText.setText("");
-                    Toast.makeText(LoginActivity.this, "注册成功，请登陆", Toast.LENGTH_SHORT).show();
+                    this.runOnUiThread(() ->
+                            Toast.makeText(LoginActivity.this, "注册成功，请登陆", Toast.LENGTH_SHORT).show());
                 }
-                Looper.loop();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -109,12 +106,16 @@ public class LoginActivity extends AppCompatActivity {
                 Response response = httpClient.newCall(request).execute();
                 CommonResult commonResult = gson.fromJson(response.body().string(), CommonResult.class);
                 AccountInfoVO accountInfoVO = gson.fromJson(gson.toJson(commonResult.getData()), AccountInfoVO.class);
-                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
-                editor.putInt("id", accountInfoVO.getId());
-                editor.putString("name", accountInfoVO.getUsername());
-                editor.apply();
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+                if (accountInfoVO != null) {
+                    SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                    editor.putInt("id", accountInfoVO.getId());
+                    editor.putString("name", accountInfoVO.getUsername());
+                    editor.apply();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    this.runOnUiThread(() -> Toast.makeText(LoginActivity.this, "输入错误，请重新尝试", Toast.LENGTH_SHORT).show());
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
